@@ -30,7 +30,7 @@ public class IntegralComponentProcessRequestServiceTests {
 
     @Test
     void processComponentDetailIntegral(){
-        ComponentProcessRequest componentProcessRequest = new ComponentProcessRequest(1,"Madhu",1234,"Integral","Material",5);
+        ComponentProcessRequest componentProcessRequest = new ComponentProcessRequest(1,"Madhu",1234,"Integral","Material",5,"yes","some defect","return");
         when(packagingDeliveryClient.packagingAndDeliveryCost("someAccessoryComponent",5)).thenReturn(1000);
         ComponentProcessResponse componentProcessResponse = integralComponentProcessRequestService.processComponentDetails(componentProcessRequest);
 

@@ -12,11 +12,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityManager;
-
 @RestController
 @RequestMapping("/process")
 @Slf4j
+@CrossOrigin
 public class ComponentProcessingController {
 
     @Autowired
@@ -26,7 +25,7 @@ public class ComponentProcessingController {
     private AuthServiceClient authClient;
 
 
-    @GetMapping("/process-detail")
+    @PostMapping("/process-detail")
     public ResponseEntity<ComponentProcessResponse> processComponentDetails (@RequestHeader("Authorization") String token, @RequestBody ComponentProcessRequest componentProcessRequest) throws InvalidComponentRequestDetailsException{
         log.info("******** Starting auth check **********");
         authClient.validateToken(token);

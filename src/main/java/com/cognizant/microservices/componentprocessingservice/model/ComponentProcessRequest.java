@@ -23,5 +23,8 @@ public class ComponentProcessRequest {
     private String componentType;
     private String componentName;
     private int noOfComponents;
+    private String isPriorityOne;
+    private String defectiveDetails;
+    private String returnOrReplacement;
 
 }

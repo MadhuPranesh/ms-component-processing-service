@@ -31,7 +31,7 @@ public class AccessoryComponentProcessRequestServiceTests {
 
     @Test
     void processComponentDetailsAccessory(){
-        ComponentProcessRequest componentProcessRequest = new ComponentProcessRequest(1,"Madhu",1234,"Accessory","Material",5);
+        ComponentProcessRequest componentProcessRequest = new ComponentProcessRequest(1,"Madhu",1234,"Accessory","Material",5,"yes","some defect","return");
         when(packagingDeliveryClient.packagingAndDeliveryCost("someAccessoryComponent",5)).thenReturn(1000);
         ComponentProcessResponse componentProcessResponse = accessorylComponentProcessRequestService.processComponentDetails(componentProcessRequest);
 

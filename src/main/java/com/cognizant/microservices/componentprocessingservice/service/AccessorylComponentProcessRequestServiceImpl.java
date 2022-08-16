@@ -6,12 +6,14 @@ import com.cognizant.microservices.componentprocessingservice.model.ComponentPro
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 
 @Service
 @Slf4j
+@Transactional
 public class AccessorylComponentProcessRequestServiceImpl implements ComponentProcessRequestService{
 
     private static final int PROCESSING_CHARGE = 300;
