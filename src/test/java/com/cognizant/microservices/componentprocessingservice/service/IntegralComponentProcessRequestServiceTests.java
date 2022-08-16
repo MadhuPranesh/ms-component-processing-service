@@ -31,8 +31,8 @@ public class IntegralComponentProcessRequestServiceTests {
     @Test
     void processComponentDetailIntegral(){
         ComponentProcessRequest componentProcessRequest = new ComponentProcessRequest(1,"Madhu",1234,"Integral","Material",5,"yes","some defect","return");
-        when(packagingDeliveryClient.packagingAndDeliveryCost("someAccessoryComponent",5)).thenReturn(1000);
-        ComponentProcessResponse componentProcessResponse = integralComponentProcessRequestService.processComponentDetails(componentProcessRequest);
+        when(packagingDeliveryClient.packagingAndDeliveryCost("sometoken","someAccessoryComponent",5)).thenReturn(1000);
+        ComponentProcessResponse componentProcessResponse = integralComponentProcessRequestService.processComponentDetails("sometoken",componentProcessRequest);
 
         doNothing().when(entityManager).persist(ArgumentMatchers.any());
         assertEquals(LocalDate.now().plusDays(5),componentProcessResponse.getDateOfDelivery());

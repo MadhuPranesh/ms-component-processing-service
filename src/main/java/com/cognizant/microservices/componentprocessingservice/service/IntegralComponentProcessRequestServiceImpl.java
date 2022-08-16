@@ -26,7 +26,7 @@ public class IntegralComponentProcessRequestServiceImpl implements ComponentProc
     private PackagingDeliveryClient packagingDeliveryClient;
 
     @Override
-    public ComponentProcessResponse processComponentDetails(ComponentProcessRequest componentProcessRequest) {
+    public ComponentProcessResponse processComponentDetails(String token,ComponentProcessRequest componentProcessRequest) {
 
         log.info("****** Started processing details for accessory type ***********");
         String componentType = componentProcessRequest.getComponentType();
@@ -39,7 +39,7 @@ public class IntegralComponentProcessRequestServiceImpl implements ComponentProc
 
         long requestId = componentProcessRequest.getProcessRequestId();
         int packagingAndDeliverCharge = packagingDeliveryClient
-                    .packagingAndDeliveryCost( componentType, countOfComponents);
+                    .packagingAndDeliveryCost( token,componentType, countOfComponents);
         LocalDate estimatedDeliveryDate = LocalDate.now().plusDays(5);
 
         ComponentProcessResponse componentProcessResponse = new ComponentProcessResponse(requestId,PROCESSING_CHARGE,packagingAndDeliverCharge,estimatedDeliveryDate);

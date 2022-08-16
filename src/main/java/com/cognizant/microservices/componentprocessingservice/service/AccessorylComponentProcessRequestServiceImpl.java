@@ -24,7 +24,7 @@ public class AccessorylComponentProcessRequestServiceImpl implements ComponentPr
     private PackagingDeliveryClient packagingDeliveryClient;
 
     @Override
-    public ComponentProcessResponse processComponentDetails(ComponentProcessRequest componentProcessRequest) {
+    public ComponentProcessResponse processComponentDetails(String token, ComponentProcessRequest componentProcessRequest) {
 
         log.info("****** Started processing details for accessory type ***********");
         String componentType = componentProcessRequest.getComponentType();
@@ -36,7 +36,7 @@ public class AccessorylComponentProcessRequestServiceImpl implements ComponentPr
         log.info("************ Saved - client request detials to the database ***********");
 
         long requestId = componentProcessRequest.getProcessRequestId();
-        int packagingAndDeliverCharge = packagingDeliveryClient.packagingAndDeliveryCost( componentType, countOfComponents);
+        int packagingAndDeliverCharge = packagingDeliveryClient.packagingAndDeliveryCost( token,componentType, countOfComponents);
         LocalDate estimatedDeliveryDate = LocalDate.now().plusDays(2);
 
         ComponentProcessResponse componentProcessResponse = new ComponentProcessResponse(requestId,PROCESSING_CHARGE,packagingAndDeliverCharge,estimatedDeliveryDate);

@@ -6,5 +6,5 @@ import com.cognizant.microservices.componentprocessingservice.model.ComponentPro
 import javax.persistence.EntityManager;
 
 public interface ComponentProcessRequestService {
-    public ComponentProcessResponse processComponentDetails(ComponentProcessRequest componentProcessRequest);
+    public ComponentProcessResponse processComponentDetails(String token,ComponentProcessRequest componentProcessRequest);
 }

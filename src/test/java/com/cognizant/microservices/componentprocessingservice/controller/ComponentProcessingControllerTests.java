@@ -50,10 +50,9 @@ public class ComponentProcessingControllerTests {
 
         when(authServiceClient.validateToken(ArgumentMatchers.any())).thenReturn(true);
         when(componentTypeDeciderService.decideComponentTypeAndProcessRequest(ArgumentMatchers.any())).thenReturn(componentProcessRequestService);
-        when(componentProcessRequestService.processComponentDetails(ArgumentMatchers.any())).thenReturn(componentProcessResponse);
-
+        when(componentProcessRequestService.processComponentDetails(ArgumentMatchers.any(),ArgumentMatchers.any())).thenReturn(componentProcessResponse);
         String jsonObj = mapper.writeValueAsString(new ComponentProcessRequest(1,"m",123,"Integral","Material",5,"yes","some defect","return"));
-        MvcResult result = mockMvc.perform(get("/process/process-detail").contentType(MediaType.APPLICATION_JSON)
+        MvcResult result = mockMvc.perform(post("/process/process-detail").contentType(MediaType.APPLICATION_JSON)
                 .header("Authorization","sometoken").content(jsonObj)).andExpect(status().isOk())
                 .andReturn();
         assertEquals(200,result.getResponse().getStatus());
@@ -77,7 +76,7 @@ public class ComponentProcessingControllerTests {
         when(authServiceClient.validateToken(ArgumentMatchers.any())).thenReturn(true);
         when(componentTypeDeciderService.decideComponentTypeAndProcessRequest(ArgumentMatchers.any())).thenThrow(new InvalidComponentRequestDetailsException("Invalid user name"));
 
-        MvcResult result = mockMvc.perform(get("/process/process-detail").contentType(MediaType.APPLICATION_JSON)
+        MvcResult result = mockMvc.perform(post("/process/process-detail").contentType(MediaType.APPLICATION_JSON)
                 .header("Authorization","sometoken").content(String.valueOf(new JSONObject()))).andExpect(status().isInternalServerError())
                 .andReturn();
     }

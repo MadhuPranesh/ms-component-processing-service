@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.RequestHeader;
 @FeignClient(name="packaging-delivery-service")
 public interface PackagingDeliveryClient {
     @GetMapping("/packagingAndDeliveryService/{componentType}/{count}")
-    public int packagingAndDeliveryCost(@PathVariable("componentType") String componentType, @PathVariable("count") int noOfComponents);
+    public int packagingAndDeliveryCost(@RequestHeader(name = "Authorization") String token, @PathVariable("componentType") String componentType, @PathVariable("count") int noOfComponents);
 }

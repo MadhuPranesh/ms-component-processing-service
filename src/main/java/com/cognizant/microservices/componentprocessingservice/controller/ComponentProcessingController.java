@@ -27,14 +27,14 @@ public class ComponentProcessingController {
 
     @PostMapping("/process-detail")
     public ResponseEntity<ComponentProcessResponse> processComponentDetails (@RequestHeader("Authorization") String token, @RequestBody ComponentProcessRequest componentProcessRequest) throws InvalidComponentRequestDetailsException{
-        log.info("******** Starting auth check **********");
+        log.info("******** Starting auth check for cmp service **********");
         authClient.validateToken(token);
-        log.info("******** Auth check successfull ***********");
+        log.info("******** Auth check successfull for cmp service***********");
 
         ComponentProcessRequestService componentProcessRequestService = componentTypeDeciderService.decideComponentTypeAndProcessRequest(componentProcessRequest);
         log.info("******* Received component type is {}",componentProcessRequest.getComponentType());
 
-        ComponentProcessResponse componentProcessResponse = componentProcessRequestService.processComponentDetails(componentProcessRequest);
+        ComponentProcessResponse componentProcessResponse = componentProcessRequestService.processComponentDetails(token,componentProcessRequest);
 
         return new ResponseEntity<>(componentProcessResponse, HttpStatus.OK);
     }
@@ -46,9 +46,9 @@ public class ComponentProcessingController {
             @PathVariable("creditLimit") double creditLimit,
             @PathVariable("processingCharge") double processingCharge
     ){
-        log.info("******** Starting auth check **********");
+        log.info("******** Starting auth check for cmp service **********");
         authClient.validateToken(token);
-        log.info("******** Auth check successfull ***********");
+        log.info("******** Auth check successfull for cmp service***********");
 
         log.info("********** Payment Processing started *********");
         String response = "Processed successfully!!!. Your request ID is " + requestID;
