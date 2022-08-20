@@ -56,4 +56,10 @@ public class ComponentProcessingController {
 
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
+
+    @GetMapping(value = "/statusCheck")
+    public ResponseEntity<String> statusCheck() {
+        log.info("**********  Healthcheck is OK ***************");
+        return new ResponseEntity<>("Health check is fine", HttpStatus.OK);
+    }
 }
